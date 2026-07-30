@@ -1,0 +1,8 @@
+-- Dashboard counts (execute through app.zcql().executeZCQLQuery()).
+SELECT COUNT(ROWID) AS total_medicines FROM Medicines;
+SELECT COUNT(ROWID) AS total_batches FROM Batches;
+SELECT COUNT(ROWID) AS active_batches FROM Batches WHERE status = 'Active';
+SELECT COUNT(ROWID) AS expiring_batches FROM Batches WHERE status = 'Expiring';
+SELECT COUNT(ROWID) AS expired_batches FROM Batches WHERE status = 'Expired';
+SELECT COUNT(ROWID) AS low_stock_medicines FROM Batches WHERE quantity < 20;
+SELECT * FROM Alert_Logs ORDER BY alert_date DESC LIMIT 25;

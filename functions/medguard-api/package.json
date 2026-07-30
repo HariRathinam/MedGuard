@@ -1,0 +1,11 @@
+{
+  "name": "medguard-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "express": "^4.21.2",
+    "medguard-shared": "file:../shared",
+    "zcatalyst-sdk-node": "^2.0.0"
+  }
+}

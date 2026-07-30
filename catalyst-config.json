@@ -1,0 +1,23 @@
+{
+  "functions": {
+    "targets": [
+      {
+        "source": "functions/medguard-api",
+        "name": "medguard-api",
+        "type": "advancedio",
+        "stack": "node18",
+        "memory": 256
+      },
+      {
+        "source": "functions/expiry-checker",
+        "name": "expiry-checker",
+        "type": "job",
+        "stack": "node18",
+        "memory": 256
+      }
+    ]
+  },
+  "client": {
+    "source": "client"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "defaults": {
+    "project": 1,
+    "env": 1
+  },
+  "actives": {
+    "project": 1,
+    "env": 1
+  },
+  "projects": [
+    {
+      "idx": 1,
+      "id": "58326000000016001",
+      "name": "MedGuard",
+      "domain": {
+        "id": "50044495989",
+        "name": "medguard-60080656285.development"
+      },
+      "timezone": "Asia/Kolkata",
+      "env": [
+        {
+          "idx": 1,
+          "id": "60080656285",
+          "name": "Development",
+          "type": 3
+        }
+      ]
+    }
+  ]
+}

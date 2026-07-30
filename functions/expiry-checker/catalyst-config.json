@@ -1,0 +1,10 @@
+{
+  "deployment": {
+    "name": "expiry-checker",
+    "stack": "node18",
+    "type": "job"
+  },
+  "execution": {
+    "main": "index.js"
+  }
+}

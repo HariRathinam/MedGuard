@@ -2,5 +2,8 @@
   "name": "medguard-shared",
   "version": "1.0.0",
   "private": true,
-  "main": "constants.js"
+  "main": "constants.js",
+  "dependencies": {
+    "zcatalyst-sdk-node": "^2.0.0"
+  }
 }

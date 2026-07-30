@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "source": "functions",
+    "targets": ["medguard-api", "expiry-checker"]
+  },
+  "client": {
+    "source": "client"
+  }
+}

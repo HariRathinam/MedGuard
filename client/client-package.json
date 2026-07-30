@@ -1,0 +1,7 @@
+{
+  "name": "MedGuard",
+  "version": "1.0.1",
+  "description": "Hospital pharmacy inventory and expiry management system",
+  "homepage": "index.html",
+  "login_redirect": "index.html"
+}

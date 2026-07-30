@@ -3,10 +3,20 @@
 const pages = ['Dashboard', 'Medicines', 'Batches', 'Users', 'Alert Logs', 'Reports'];
 const apiBase = '/server/medguard-api';
 let session;
+let demoMode = false;
+const demoData = {
+  '/dashboard': { total_medicines: 128, total_batches: 342, active_batches: 305, expiring_batches: 21, expired_batches: 4, low_stock_medicines: 9, recent_alerts: [{ medicine: 'Amoxicillin 500 mg', batch: 'AMX-2407', alert_type: 'Expiring soon', date: '2026-08-18', status: 'Open' }, { medicine: 'Insulin Glargine', batch: 'ING-1209', alert_type: 'Low stock', date: '2026-07-29', status: 'Open' }, { medicine: 'Paracetamol 650 mg', batch: 'PCM-0312', alert_type: 'Expired', date: '2026-07-27', status: 'Resolved' }] },
+  '/medicines': [{ name: 'Amoxicillin 500 mg', category: 'Antibiotic', available_stock: 480, reorder_level: 150, status: 'In stock' }, { name: 'Insulin Glargine', category: 'Diabetes care', available_stock: 18, reorder_level: 30, status: 'Low stock' }, { name: 'Paracetamol 650 mg', category: 'Analgesic', available_stock: 960, reorder_level: 200, status: 'In stock' }],
+  '/batches': [{ batch_no: 'AMX-2407', medicine: 'Amoxicillin 500 mg', quantity: 240, expiry_date: '2026-08-18', status: 'Expiring soon' }, { batch_no: 'ING-1209', medicine: 'Insulin Glargine', quantity: 18, expiry_date: '2027-03-12', status: 'Active' }, { batch_no: 'PCM-0312', medicine: 'Paracetamol 650 mg', quantity: 0, expiry_date: '2026-07-27', status: 'Expired' }],
+  '/users': [{ name: 'Dr. Asha Menon', email: 'asha.menon@medguard.demo', role: 'Admin', status: 'Active' }, { name: 'Ravi Kumar', email: 'ravi.kumar@medguard.demo', role: 'Pharmacist', status: 'Active' }],
+  '/alert-logs': [{ alert_type: 'Expiring soon', medicine: 'Amoxicillin 500 mg', created_on: '2026-07-30', status: 'Open' }, { alert_type: 'Low stock', medicine: 'Insulin Glargine', created_on: '2026-07-29', status: 'Open' }],
+  '/reports/inventory': [{ medicine: 'Amoxicillin 500 mg', batches: 4, total_quantity: 480, nearest_expiry: '2026-08-18' }, { medicine: 'Insulin Glargine', batches: 2, total_quantity: 18, nearest_expiry: '2027-03-12' }]
+};
 const $ = (selector) => document.querySelector(selector);
 const esc = (value) => String(value ?? '').replace(/[&<>"]/g, (char) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[char]));
 
 async function api(path) {
+  if (demoMode) return demoData[path];
   const response = await fetch(`${apiBase}${path}`, { credentials: 'include' });
   const payload = await response.json();
   if (!response.ok) throw new Error(payload.message || 'Request failed');
@@ -35,6 +45,11 @@ async function start() {
   if (!session) return;
   $('#login').classList.remove('active'); $('#app').classList.add('active'); renderNav(); render('Dashboard');
 }
-$('#sign-out').onclick = () => catalyst.auth.signOut(window.location.origin);
+function openDemo() {
+  demoMode = true; session = { name: 'Dr. Asha Menon', role: 'Admin' };
+  $('#login').classList.remove('active'); $('#app').classList.add('active'); renderNav(); render('Dashboard');
+}
+$('#open-demo').onclick = openDemo;
+$('#sign-out').onclick = () => demoMode ? location.reload() : window.catalyst && catalyst.auth.signOut(window.location.origin);
 if (window.catalyst) catalyst.auth.signIn('catalyst-login');
 start();

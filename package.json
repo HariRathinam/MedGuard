@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "description": "MedGuard Hospital Pharmacy Inventory and Expiry Management System on Zoho Catalyst",
-  "main": "functions/medguard-api/index.js",
+  "main": "server/index.js",
   "scripts": {
-    "start": "catalyst serve",
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "start": "node server/index.js",
+    "catalyst:serve": "catalyst serve",
     "lint": "eslint .",
     "test": "node --test test/**/*.test.js"
   },
